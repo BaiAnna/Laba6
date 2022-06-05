@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.Lab6'
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project (':common')
+    implementation 'junit:junit:4.13.1'
+    testImplementation 'org.mockito:mockito-core:4.3.1'
+    implementation 'org.clojure:tools.logging:1.2.4'
+}
+jar {
+    manifest {
+        attributes "Main-Class": "ru.Lab6.client.App"
+    }
+
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+    exclude {
+        "META-INF/DEPENDENCIES"
+    }
+}
